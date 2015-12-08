@@ -30,8 +30,7 @@ public class Robot extends IterativeRobot {
     Compressor pump;
 	int autoLoopCounter;
 	Servo servo;
-	commandObject onecommand;
-	commandObject[] autoArray;
+
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -58,26 +57,12 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	autoLoopCounter = 0;
     	
-    	autoArray[0] = onecommand;
-    	onecommand = new commandObject(200) {
-        	public void worker() {
-        		myRobot.drive(0.2, 0.0); 	// drive forwards half speed	
-        	};
-    	};
-    	
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	for(int i = autoArray.length-1; i > 0; i--) {
-    		if(autoLoopCounter < autoArray[i].count) {
-    			autoArray[i].worker();
-    			autoLoopCounter++;
-    			break;
-    		};
-    	};
     	if(autoLoopCounter < 100) //Check if we've completed 100 loops (approximately 2 seconds)
 		{
 			myRobot.drive(0.2, 0.0); 	// drive forwards half speed
