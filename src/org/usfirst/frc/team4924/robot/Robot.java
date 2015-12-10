@@ -106,7 +106,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	while (isOperatorControl() && isEnabled()) {
-        	myRobot.arcadeDrive(leftStick.getY()*-1, leftStick.getX()*-1);
         	if(leftStick.getRawButton(4)) {
         		leftMotor.set(-1);
         		rightMotor.set(-1);
@@ -132,12 +131,17 @@ public class Robot extends IterativeRobot {
         		relayIn.set(Relay.Value.kForward);
       
         	}else{        		
-        		relayIn.set(Relay.Value.kReverse);        		
+        		relayIn.set(Relay.Value.kReverse);
         	};
         	if(leftStick.getRawButton(7)) {
         		pump.start();
         	}else if(leftStick.getRawButton(8)){
         		pump.stop();
+        	};
+        	if(leftStick.getRawButton(2)){
+        		myRobot.arcadeDrive(leftStick.getY()*-.50, leftStick.getX()*-.50);
+        	}else{
+        		myRobot.arcadeDrive(leftStick.getY()*-1, leftStick.getX()*-1);
         	};
         }
     }
